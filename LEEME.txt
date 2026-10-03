@@ -1,0 +1,43 @@
+CUADERNO DE AULA · versión «bosque»
+===================================
+
+Qué es: el registro diario de clases (qué se ha hecho, material, deberes,
+revisión por número de lista, clima del aula, minutos perdidos, PT y
+pilotaje) como aplicación web que se instala en el móvil. Funciona sin
+conexión. Los datos se guardan SOLO en el móvil de quien la usa.
+
+La app está vacía: cada docente configura sus grupos y su horario la
+primera vez que la abre. Nada personal está en el repositorio.
+
+PUBLICARLA (una vez)
+1. En GitHub, crea un repositorio nuevo (por ejemplo «cuaderno-bosque»).
+2. Sube a la raíz estos archivos: index.html, sw.js, manifest.webmanifest,
+   icon-192.png, icon-512.png, icon-maskable-512.png.
+3. Settings → Pages → Branch: main, carpeta / (root) → Save.
+4. Queda en https://<usuario>.github.io/cuaderno-bosque/
+
+PRIMER USO (lo hace cada docente en su móvil)
+1. Abrir la dirección en Chrome → menú ⋮ → «Instalar aplicación».
+2. «Configurar mi horario»: grupos (nombre, nivel, color, alumnos), horas
+   del centro, otras tareas (guardias, reuniones…) y qué hay cada hora de
+   cada día. Las horas vienen con las del IES Politècnic; se pueden cambiar.
+3. Ajustes → «Días no lectivos» → cargar los festivos del calendario
+   escolar 2026-27 de Castelló (o añadirlos a mano).
+4. Ajustes: nombre, centro y día del aviso de copia de seguridad.
+
+LOS DATOS
+- Están en el almacenamiento de Chrome del móvil. Nada va a GitHub ni a
+  ningún servidor.
+- Si se desinstala la app o se borran los datos de Chrome, se pierden. Por
+  eso: Exportar → «Guardar copia de seguridad», una vez por semana, a una
+  carpeta de OneDrive corporativo. La app avisa cuando toca.
+- La copia lleva también el horario: en un móvil nuevo, «Restaurar una
+  copia» lo recupera todo.
+- Alumnado solo por número de lista, nunca por nombre.
+
+ACTUALIZARLA
+Sube el index.html nuevo (y sw.js con VERSION nueva: bosque-v2, v3…). Al
+abrir la app con conexión carga la versión nueva; los datos no se tocan.
+
+Dibujos: originales, inspirados en el estilo de una servilleta de bosque
+(ratón con bufanda, erizo, setas, árboles). Se pueden quitar en Ajustes.
