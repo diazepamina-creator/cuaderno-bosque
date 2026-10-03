@@ -40,4 +40,8 @@ Sube el index.html nuevo (y sw.js con VERSION nueva: bosque-v2, v3…). Al
 abrir la app con conexión carga la versión nueva; los datos no se tocan.
 
 Dibujos: originales, inspirados en el estilo de una servilleta de bosque
-(ratón con bufanda, erizo, setas, árboles). Se pueden quitar en Ajustes.
+(ratón con bufanda, erizo, setas, árboles, pajarito). Animaciones muy
+suaves según la estación: hojas y viento en otoño, nieve en invierno, sol y
+pétalos en primavera, sol en verano. El ratón parpadea y mueve la cola.
+En Ajustes se pueden quitar los dibujos, parar las animaciones o fijar una
+estación. Si el móvil tiene activado «reducir movimiento», no se animan.
