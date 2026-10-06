@@ -3,7 +3,7 @@
 // primero la versión nueva (así llegan las actualizaciones que subas a
 // GitHub); sin red, abre la guardada. Los datos NO pasan por aquí: están
 // en el almacenamiento del navegador.
-const VERSION = 'bosque-v9';
+const VERSION = 'bosque-v11';
 const BASE = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', e => {
