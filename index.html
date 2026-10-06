@@ -72,8 +72,12 @@ button{cursor:pointer}
 .deco{display:inline-block;vertical-align:bottom;overflow:visible}
 .cab-raton{position:relative;display:inline-block;margin-left:auto;margin-right:-4px;margin-bottom:-2px;flex:none;width:58px;height:58px}
 .cab-raton .cielo{position:absolute;right:-6px;top:-8px}
-.pie-bosque{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:6px;margin:26px 0 0;padding:34px 0 2px;border-bottom:1.5px solid var(--linea);overflow:hidden}
-.pie-bosque .p{margin-bottom:34px}
+.pie-bosque{position:relative;display:flex;justify-content:center;align-items:flex-end;gap:6px;margin:26px 0 0;padding:34px 0 0;border-bottom:1.5px solid var(--linea);overflow:hidden}
+.pie-bosque>svg,.pie-bosque .arbol-p svg{display:block}
+/* el pájaro se posa en la rama derecha del árbol: patas (23.5, 37.8)·0.56 sobre la rama (60, 36)·0.64,
+   lejos de las ramas de arriba para que se le vea el pico */
+.pie-bosque .arbol-p{position:relative;display:block}
+.pie-bosque .posado{position:absolute;left:25.2px;top:1.8px;line-height:0}
 .pie-bosque .cielo{position:absolute;right:8%;top:0}
 .pie-bosque .nube-v{position:absolute;left:-60px;top:4px;opacity:.9}
 .pie-bosque .manto{position:absolute;left:0;right:0;bottom:0;height:5px;background:var(--hoja);border-top:1.5px solid var(--copo);border-radius:4px 4px 0 0}
@@ -436,7 +440,7 @@ const cfgInicial = () => ({
   // unidades o situaciones de aprendizaje, por nivel, con las sesiones previstas
   unidades:{},
 });
-const VERSION_APP = 'bosque 1.3.0';
+const VERSION_APP = 'bosque 1.3.2';
 // CALENDARIO ESCOLAR 2026-27 del centro (días de lunes a viernes sin clase).
 // Se cargan con un botón en Ajustes; después se pueden quitar uno a uno.
 // Después del fin del periodo lectivo no se cuentan sesiones pendientes.
@@ -935,7 +939,7 @@ const ARTE = {
     <path d="M51 82c3 3.5 7 4 10 1.5M64 85c3 2 6 1.5 7.5-1" fill="none" ${L} stroke-width="2"/>
     <ellipse cx="50" cy="106.5" rx="6.5" ry="2.8" fill="var(--hoja)" ${L} stroke-width="1.8"/>
     <ellipse cx="66" cy="106.5" rx="6.5" ry="2.8" fill="var(--hoja)" ${L} stroke-width="1.8"/>`],
-  erizo:[130,80,`
+  erizo:[130,74,`
     <path d="M68 40c14 2 40 14 52 22-12 6-30 10-50 8z" fill="var(--hoja)" ${L} stroke-width="2.2"/>
     <g class="respira">
     <path d="M9 66C7 39 29 20 56 20c18 0 32 10 37 24-5 8-7 15-5 22z" fill="var(--naranja)" ${L} stroke-width="2.2"/>
@@ -950,7 +954,7 @@ const ARTE = {
     <ellipse cx="105" cy="62" rx="2.6" ry="1.8" fill="var(--rojo2)" opacity=".8"/>
     <path fill="none" ${L} stroke-width="1.1" d="M122 61l8-3M122 63l8 2"/>
     <path fill="none" ${L} stroke-width="2.6" d="M26 66v6M39 67v6M70 67v6M83 66v6"/>`],
-  setas:[80,50,`
+  setas:[80,46,`
     <path d="M5 23C5 9 35 9 35 23z" fill="var(--tronco)"/>
     <g fill="var(--hoja)" opacity=".55"><circle cx="13" cy="17" r="1.1"/><circle cx="20" cy="13.5" r="1.1"/><circle cx="27" cy="16" r="1.1"/><circle cx="17" cy="20" r="1"/><circle cx="30" cy="20.5" r="1"/></g>
     <path d="M16.5 23l-1.2 22h8.4l-1.2-22z" fill="var(--hoja)" ${L} stroke-width="1.8"/>
@@ -959,12 +963,11 @@ const ARTE = {
     <path d="M47.5 33v12h4V33z" fill="var(--hoja)" ${L} stroke-width="1.6"/>
     <path d="M61 37c0-7 13-7 13 0z" fill="var(--tronco)"/>
     <path d="M66 37v8h3v-8z" fill="var(--hoja)" ${L} stroke-width="1.4"/>
-    <path d="M2 46h76" ${L} stroke-width="1" opacity=".25"/>
     <g fill="var(--tronco)" opacity=".55"><circle cx="9" cy="43" r="1"/><circle cx="28" cy="44" r="1"/><circle cx="37" cy="42" r="1"/><circle cx="58" cy="44" r="1"/></g>`],
-  arbol:[60,100,`
+  arbol:[70,100,`
     <path d="M26 100c1-14 1-30 2-44l4 0c0 14 0 30 1 44z" fill="var(--tronco)"/>
     <g class="ramas" fill="none" ${L} stroke-width="3">
-      <path d="M29 62 15 44 10 36M15 44l-7-3M30 54l14-16 5-10M44 38l7-1M30 46l1-18 6-12M31 28l-8-9M37 16l2-6M23 19l-3-6"/>
+      <path d="M29 62 15 44 10 36M15 44l-7-3M30 54l14-16 5-10M44 38 66 35.6M30 58l1-30 6-12M31 28l-8-9M37 16l2-6M23 19l-3-6"/>
     </g>`],
   abeto:[40,70,`
     <g class="ramas" fill="none" ${L} stroke-width="2.4"><path d="M20 70V6M20 16l-8 7M20 16l8 7M20 27l-11 9M20 27l11 9M20 40l-14 11M20 40l14 11M20 54l-16 10M20 54l16 10"/></g>`],
@@ -1018,7 +1021,7 @@ function pieBosque(){
   return `<div class="pie-bosque e-${e}${animOn()?' vivo':''}" aria-hidden="true">
     ${solar ? `<span class="cielo">${dibujo('sol',44,44)}</span><span class="nube-v">${dibujo('nube',58,30)}</span>` : e==='invierno' ? `<span class="nube-v">${dibujo('nube',58,30)}</span>` : ''}
     ${capaClima('pie')}
-    ${dibujo('abeto',26,46)}${dibujo('setas',58,36)}${dibujo('erizo',80,49)}${dibujo('arbol',38,64)}${dibujo('pajaro',34,27,'p')}${dibujo('setas',44,28)}${dibujo('abeto',22,38)}
+    ${dibujo('abeto',26,46)}${dibujo('setas',58,33.4)}${dibujo('erizo',80,45.5)}<span class="arbol-p">${dibujo('arbol',44.8,64)}<span class="posado">${dibujo('pajaro',28,22.4)}</span></span>${dibujo('setas',44,25.3)}${dibujo('abeto',22,38)}
     ${e==='invierno'?'<span class="manto"></span>':''}</div>`;
 }
 function ratonCab(){
@@ -1080,7 +1083,7 @@ function vDia(){
       <button class="bloque-btn" data-a="restaurar" style="margin-top:0">Restaurar una copia</button></div>`;
   }
   if(w===0 || w===6){
-    return h + `<div class="vacio">${store.cfg.deco!==false?dibujo('erizo',104,64)+'<br>':''}<b>Fin de semana.</b><br>No hay clases en el horario.</div>`;
+    return h + `<div class="vacio">${store.cfg.deco!==false?dibujo('erizo',104,59.2)+'<br>':''}<b>Fin de semana.</b><br>No hay clases en el horario.</div>`;
   }
   if(store.cfg.nolectivos.includes(dia)){
     return h + `<div class="vacio"><b>Día no lectivo.</b><br>Las sesiones de hoy no cuentan como pendientes.<br><br>
@@ -1509,7 +1512,7 @@ function vFechas(){
     ${e.notas?`<div class="t" style="margin-top:4px">${esc(e.notas)}</div>`:''}</button>`;
   let h = `<h1 class="titulo">Fechas</h1><p class="estado-sync" id="sync"></p>
     <button class="bloque-btn lleno" data-a="nueva-fecha" style="margin:0 0 16px">Añadir prueba o entrega</button>`;
-  h += futuras.length ? futuras.map(tarjeta).join('') : `<div class="vacio">${store.cfg.deco!==false?dibujo('setas',80,50)+'<br>':''}No hay fechas próximas.<br>Apunta pruebas y entregas en cuanto las fijes: la app te dirá cuántas clases te quedan.</div>`;
+  h += futuras.length ? futuras.map(tarjeta).join('') : `<div class="vacio">${store.cfg.deco!==false?dibujo('setas',80,46)+'<br>':''}No hay fechas próximas.<br>Apunta pruebas y entregas en cuanto las fijes: la app te dirá cuántas clases te quedan.</div>`;
   if(pasadas.length) h += `<details style="margin-top:14px"><summary>Pasadas (${pasadas.length})</summary><div style="margin-top:8px">${pasadas.map(tarjeta).join('')}</div></details>`;
   return h;
 }
