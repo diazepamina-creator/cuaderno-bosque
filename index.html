@@ -273,6 +273,40 @@ textarea:focus,input:focus{border-color:var(--tinta);outline:none}
 .lista{display:grid;grid-template-columns:repeat(auto-fill,minmax(42px,1fr));gap:6px;margin-top:10px}
 .lista button{height:42px;border:1.5px solid var(--linea);background:var(--hoja);border-radius:8px;font-variant-numeric:tabular-nums;font-size:16px}
 .lista button[aria-pressed="true"]{border-color:var(--rojo);background:var(--rojo);color:#fff;font-weight:700}
+.lista.connom{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+.lista.connom button{display:flex;align-items:center;gap:8px;padding:0 10px;text-align:left;font-size:14px}
+.lista.connom button b{min-width:22px;font-size:16px}
+.lista.connom button span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.plano .mesa small{display:block;font-size:10px;font-weight:400;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding:0 2px}
+.plano.connom .mesa{height:48px}
+.nombres{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px;color:var(--gris);margin-top:8px}
+.revl{margin-top:10px;border:1px solid var(--linea);border-radius:10px;background:var(--papel)}
+.revl>summary{list-style:none;cursor:pointer;padding:10px 12px;font-size:14px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.revl>summary::-webkit-details-marker{display:none}
+.revl>summary::after{content:'▾';color:var(--gris)} .revl[open]>summary::after{content:'▴'}
+.revl .cuenta b{font-variant-numeric:tabular-nums}
+.revl .filas{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:4px 10px;padding:0 8px 8px}
+.revl .fila{display:flex;align-items:center;gap:10px;width:100%;min-height:40px;height:40px;padding:0 10px;border:1.5px solid var(--linea);border-radius:8px;background:var(--hoja);text-align:left;font-size:15px}
+.revl .fila .n{min-width:24px;font-weight:700;font-variant-numeric:tabular-nums}
+.revl .fila .nom{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.revl .fila .est{font-size:13px;white-space:nowrap;padding:3px 9px;border-radius:12px;border:1px solid var(--linea);color:var(--grafito)}
+.revl .fila[aria-pressed="true"]{border-color:var(--rojo)}
+.revl .fila[aria-pressed="true"] .est{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:700}
+.revl .fila{cursor:default}
+.revl .fila .bt{display:flex;gap:4px;margin-left:auto}
+.revl .fila .bt button{height:30px;min-width:34px;padding:0 8px;border:1.5px solid var(--linea);border-radius:15px;background:var(--hoja);font-size:13px;color:var(--grafito)}
+.revl .fila .ok{font-size:13px;color:var(--gris);white-space:nowrap}
+.revl .fila.st-no{border-color:var(--rojo)} .revl .fila.st-medias{border-color:#b7791f} .revl .fila.st-falta{border-style:dashed;opacity:.75}
+.revl .fila .bt button[data-v="no"][aria-pressed="true"]{background:var(--rojo);border-color:var(--rojo);color:#fff;font-weight:700}
+.revl .fila .bt button[data-v="medias"][aria-pressed="true"]{background:#b7791f;border-color:#b7791f;color:#fff;font-weight:700}
+.revl .fila .bt button[data-v="falta"][aria-pressed="true"]{background:var(--gris);border-color:var(--gris);color:#fff;font-weight:700}
+.plano .mesa.st-medias,.sin-mesa button.st-medias{background:#b7791f!important;border-color:#b7791f!important;color:#fff}
+.plano .mesa.st-falta,.sin-mesa button.st-falta{background:var(--gris)!important;border-color:var(--gris)!important;color:#fff;border-style:dashed!important}
+.pincel{margin-top:10px}
+.porAl{width:100%;border-collapse:collapse;font-size:14px;margin-top:6px}
+.porAl th,.porAl td{border-bottom:1px solid var(--linea);padding:5px 4px;text-align:center;font-variant-numeric:tabular-nums}
+.porAl th:nth-child(2),.porAl td:nth-child(2){text-align:left}
+.revl .filtro{display:flex;gap:6px;padding:0 8px 8px}
 .lista-nota{font-size:13px;color:var(--gris);margin-top:6px}
 /* plano del aula */
 .pizarra{text-align:center;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--gris);border-bottom:3px solid var(--grafito);margin:10px 18% 8px;padding-bottom:2px}
@@ -354,6 +388,7 @@ h3{font-size:17px;margin:18px 0 8px}
      app en segundo plano y, al volver, la vista se repinta; si el selector estuviera
      dentro, se sustituiría y el archivo elegido se perdería. -->
 <input type="file" id="archivo-copia" accept=".txt,.json,text/plain,application/json" class="sr" tabindex="-1" aria-hidden="true">
+<input type="file" id="archivo-nombres" accept=".csv,.txt,text/csv,text/plain" class="sr" tabindex="-1" aria-hidden="true">
 <input type="file" id="archivo-prog" accept=".txt,.json,text/plain,application/json" class="sr" tabindex="-1" aria-hidden="true">
 
 
@@ -401,7 +436,7 @@ const cfgInicial = () => ({
   // unidades o situaciones de aprendizaje, por nivel, con las sesiones previstas
   unidades:{},
 });
-const VERSION_APP = 'bosque 1.2.1';
+const VERSION_APP = 'bosque 1.3.0';
 // CALENDARIO ESCOLAR 2026-27 del centro (días de lunes a viernes sin clase).
 // Se cargan con un botón en Ajustes; después se pueden quitar uno a uno.
 // Después del fin del periodo lectivo no se cuentan sesiones pendientes.
@@ -491,6 +526,81 @@ const FRANJAS_DEF = [
   {n:5, ini:'12:20', fin:'13:15'},
   {n:6, ini:'13:15', fin:'14:10'},
 ];
+/* ── NOMBRES (solo en memoria) ──
+   El listado nombre ↔ número vive en el OneDrive de la GVA, no aquí. Se abre con el selector de
+   archivos, se lee y se queda en esta variable mientras la app está abierta: no va a localStorage,
+   ni al borrador, ni a las copias de seguridad, ni a los informes. Se olvida al cerrar la app, con
+   «Olvidar» o tras 20 minutos en segundo plano. El registro sigue guardando solo números. */
+let NOMBRES = null, NOMBRES_DE = '', tOculto = 0;
+/* ── REVISIÓN DE DEBERES: cuatro estados ──
+   Cada revisión guarda tres listas de números: no (no los trae), medias (a medias) y falta
+   (no ha venido). Quien no está en ninguna los trae. Las revisiones antiguas solo tienen «no»
+   y siguen valiendo igual. Los ausentes no cuentan en el porcentaje de entrega. */
+const EST = {no:'✗ No los trae', medias:'½ A medias', falta:'Falta'};
+const DEF_MEDIAS = 'Empezados, pero falta al menos un ejercicio.';
+const estadoDe = (r,n) => (r.no||[]).includes(n) ? 'no' : (r.medias||[]).includes(n) ? 'medias' : (r.falta||[]).includes(n) ? 'falta' : 'si';
+function ponEstado(r, n, st){
+  const prev = estadoDe(r, n);
+  for(const k of ['no','medias','falta']) r[k] = (r[k]||[]).filter(x=>x!==n);
+  if(st!=='si' && st!==prev) r[st] = [...r[st], n].sort((x,y)=>x-y);
+}
+function cuentaRev(r, N){
+  const no = (r.no||[]).length, medias = (r.medias||[]).length, falta = (r.falta||[]).length;
+  return {no, medias, falta, si: N - no - medias - falta, presentes: N - falta};
+}
+function revTxt(r, nom){
+  const f = a => a.map(n=> nom && nomDe(nom,n) ? `${n} (${esc(nomCorto(nomDe(nom,n)))})` : n).join(', ');
+  const p = [];
+  if((r.no||[]).length) p.push('no los traen '+f(r.no));
+  if((r.medias||[]).length) p.push('a medias '+f(r.medias));
+  if((r.falta||[]).length) p.push('faltan '+f(r.falta));
+  return p.length ? p.join(' · ') : 'los traen todos';
+}
+// estado de pantalla de la lista de deberes (no se guarda): plegadas, filtro y revisiones quitadas por error
+const revPlegadas = new Set(), revFiltro = {}, revQuitadas = {}, revPincel = {};
+let paDesde = '', paHasta = '';
+/* Deberes por alumno (número de lista) en un periodo: base para el instrumento «trabajo diario»
+   si la programación lo recoge. Cuenta solo revisiones en las que el alumno estaba. */
+function deberesPorAlumno(g, desde, hasta){
+  const N = store.cfg.alumnos[g] || 25, A = {};
+  for(let i=1;i<=N;i++) A[i] = {si:0, medias:0, no:0, falta:0};
+  let nRev = 0;
+  sesionesDe(g).forEach(([,s])=>{ if(s.estado==='no' || s.fecha<desde || s.fecha>hasta) return;
+    (s.revisiones||[]).forEach(r=>{ nRev++; for(let i=1;i<=N;i++) A[i][estadoDe(r,i)]++; }); });
+  return {N, nRev, A};
+}
+const normG = s => String(s||'').toUpperCase().replace(/ESO|[º°ª.\s-]/g,'');
+function grupoDeTexto(s){
+  const n = normG(s); if(!n) return null;
+  for(const k in GRUPOS){ if(normG(k)===n || normG(GRUPOS[k].nombre)===n) return k; }
+  if(/REF|TALLER|R4/.test(n)) return Object.keys(GRUPOS).find(k=>GRUPOS[k].nivel===4) || null;
+  return null;
+}
+function leerNombres(txt){
+  const lin = String(txt).replace(/^\uFEFF/,'').split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  if(!lin.length) return null;
+  const sep = [';','\t',','].find(c=>lin[0].includes(c)) || ';';
+  const out = {}; let n = 0, malas = 0;
+  for(const l of lin){
+    const c = l.split(sep).map(x=>x.trim().replace(/^"(.*)"$/,'$1').trim());
+    const g = grupoDeTexto(c[0]), num = parseInt(c[1]);
+    const nom = c.slice(2).filter(Boolean).join(', ');
+    if(!g || !(num>0) || !nom){ malas++; continue; }   // cabecera o fila rara
+    (out[g] = out[g] || {})[num] = nom; n++;
+  }
+  return n ? {out, n, malas} : null;
+}
+// «García López, Lucía» o «Lucía García López» → «Lucía G.»
+function nomCorto(s){
+  if(!s) return '';
+  let nom, ape;
+  if(s.includes(',')){ const [a, b] = s.split(','); nom = b.trim(); ape = a.trim(); }
+  else{ const w = s.trim().split(/\s+/); nom = w[0]; ape = w.slice(1).join(' '); }
+  const pila = nom.split(/\s+/).slice(0,2).join(' ');
+  return ape ? `${pila} ${ape[0].toUpperCase()}.` : pila;
+}
+const nomDe = (g, n) => NOMBRES && NOMBRES[g] && NOMBRES[g][n] || '';
+function olvidarNombres(aviso){ NOMBRES = null; NOMBRES_DE = ''; if(aviso) toast(aviso); }
 const OTRAS_DEF = {G:'Guardia', C:'Complementarias', RM:'Reunión de departamento', AF:'Atención a familias'};
 const PALETA = ['#E39A4C','#4FA39A','#E06A5A','#9BBF6A','#7BA7D6','#C98BB9','#E2C25B','#A88468'];
 const FIN_DEF = '2027-06-18';
@@ -598,8 +708,8 @@ function indicadores(g, desde, hasta){
   const ses = sesionesDe(g).map(([,s])=>s).filter(s=>s.fecha>=desde && s.fecha<=hasta);
   const dadas = ses.filter(s=>s.estado!=='no');
   const N = store.cfg.alumnos[g] || 25;
-  let revisadas = 0, traen = 0, total = 0;
-  dadas.forEach(s=>(s.revisiones||[]).forEach(r=>{ revisadas++; total += N; traen += N - (r.no||[]).length; }));
+  let revisadas = 0, traen = 0, total = 0, medias = 0;
+  dadas.forEach(s=>(s.revisiones||[]).forEach(r=>{ const c = cuentaRev(r, N); revisadas++; total += c.presentes; traen += c.si; medias += c.medias; }));
   const clima = {bien:0, regular:0, mal:0};
   dadas.forEach(s=>{ if(clima[s.clima]!==undefined) clima[s.clima]++; });
   const pt = dadas.filter(s=>s.pt); const ptSi = pt.filter(s=>s.pt!=='no').length;
@@ -612,7 +722,7 @@ function indicadores(g, desde, hasta){
   return {previstas, registradas: ses.filter(s=>s.fecha<=fin).length, dadas: dadas.length, noDadas: ses.length - dadas.length,
     sinRegistrar: sinRegistrar().filter(x=>x.g===g && x.k>=desde && x.k<=hasta).length,
     puestos: dadas.filter(s=>s.deberes && s.deberes.trim()).length, revisadas,
-    entrega: total ? Math.round(100*traen/total) : null, clima, climaN: clima.bien+clima.regular+clima.mal,
+    entrega: total ? Math.round(100*traen/total) : null, entregaMedias: total ? Math.round(100*medias/total) : null, clima, climaN: clima.bien+clima.regular+clima.mal,
     pt: pt.length, ptSi, porUnidad, sinUnidad, perd};
 }
 // Clima por franja horaria, sumando todos los grupos
@@ -1025,7 +1135,7 @@ function vGrupos(){
   h += `</div><p class="estado-sync" id="sync"></p>
   <div class="cifras">
     <div class="cifra"><b>${I.dadas}</b><span>impartidas de ${I.previstas} previstas</span></div>
-    <div class="cifra"><b>${I.entrega===null?'—':I.entrega+' %'}</b><span>entrega de deberes</span></div>
+    <div class="cifra"><b>${I.entrega===null?'—':I.entrega+' %'}</b><span>deberes completos${I.entregaMedias?` · ${I.entregaMedias} % a medias`:''}</span></div>
     <div class="cifra"><b>${pendDeb.length}</b><span>deberes por revisar</span></div>
   </div>`;
   if(I.climaN){
@@ -1058,6 +1168,20 @@ function vGrupos(){
     for(const [id,s] of pendDeb) h += `<li><button data-a="ir" data-id="${id}"><div class="f">Puestos el ${corta(s.fecha)}</div><div class="d">${esc(s.deberes)}</div></button></li>`;
     h += `</ul>`;
   }
+  { const d = paDesde || store.cfg.inicio, hs = paHasta || hoyK(), D = deberesPorAlumno(g, d, hs);
+    h += `<h3>Deberes por alumno</h3>
+      <div class="fila2"><input type="date" id="pa-desde" value="${d}" aria-label="Desde"><input type="date" id="pa-hasta" value="${hs}" aria-label="Hasta"></div>`;
+    if(!D.nRev) h += `<p class="leyenda">No hay revisiones de deberes en estas fechas.</p>`;
+    else{
+      h += `<details${NOMBRES&&NOMBRES[g]?' open':''}><summary>${D.nRev} ${D.nRev===1?'revisión':'revisiones'} · ver la tabla</summary>
+        <table class="porAl"><thead><tr><th>Nº</th><th>${NOMBRES&&NOMBRES[g]?'Nombre':''}</th><th>✓</th><th>½</th><th>✗</th><th>Falta</th><th>% ✓</th></tr></thead><tbody>`;
+      for(let i=1;i<=D.N;i++){ const a = D.A[i], pres = a.si + a.medias + a.no;
+        h += `<tr><td>${i}</td><td>${esc(nomCorto(nomDe(g,i)))}</td><td>${a.si}</td><td>${a.medias}</td><td>${a.no}</td><td>${a.falta}</td><td>${pres?Math.round(100*a.si/pres):'—'}</td></tr>`; }
+      h += `</tbody></table></details>
+        <p class="leyenda">% ✓ = completos sobre las revisiones en las que estaba. El CSV va solo con números, para pegarlo junto a tu listado de notas.</p>
+        <div class="chips"><button class="chip" data-a="csv-deberes" data-g="${g}">Descargar CSV (por número)</button></div>`;
+    }
+  }
   { const P = planoLleno(g), N = store.cfg.alumnos[g]||25, AU = aulasDe(g);
     h += `<h3>Plano del aula</h3>${P ? `<p class="leyenda">${Object.keys(P.sitios).length} de ${N} en su mesa. En «Deberes para revisar» se toca la mesa de quien no los trae.</p>`
       : `<p class="leyenda">Coloca los números de lista en sus mesas y, al revisar deberes, toca la mesa en vez de buscar el número. Solo se guardan números.</p>`}
@@ -1076,7 +1200,7 @@ function vGrupos(){
     for(const [id,s] of [...ses].reverse()){
       const rev = (s.revisiones||[]).map(r=>{
         const o = store.ses[r.de]; const f = o ? corta(o.fecha) : corta(r.de.split('_')[0]);
-        return `Deberes del ${f}: ${r.no && r.no.length ? 'no los traen '+r.no.join(', ') : 'los traen todos'}`;
+        return `Deberes del ${f}: ${revTxt(r)}`;
       }).join(' · ');
       h += `<li><button data-a="ir" data-id="${id}">
         <div class="f">${corta(s.fecha)} · ${FR[s.franja].ini}${s.clima?' · '+CLIMA[s.clima]:''}${perdTxt(s)?' · '+perdTxt(s):''}${s.unidad?' · '+esc(nombreUnidad(g,s.unidad)):''}${s.reconstruido?' · reconstruido':''}</div>
@@ -1299,8 +1423,8 @@ let planoB = null, planoG = null, planoA = '';
 function abrirPlano(g, aula){ planoG = g; planoA = aula || '';
   planoB = clon((store.cfg.planos||{})[clavePlano(g, planoA)] || (planoA && planoLleno(g) ? {...planoLleno(g)} : null) || {filas:5, cols:6, sitios:{}});
   vista = 'plano'; pintar(); window.scrollTo(0,0); }
-function rejillaPlano(p, celda){
-  let h = `<div class="pizarra">pizarra</div><div class="plano" style="grid-template-columns:repeat(${p.cols},1fr)">`;
+function rejillaPlano(p, celda, cls){
+  let h = `<div class="pizarra">pizarra</div><div class="plano${cls?' '+cls:''}" style="grid-template-columns:repeat(${p.cols},1fr)">`;
   for(let f=1; f<=p.filas; f++) for(let c=1; c<=p.cols; c++) h += celda(`${f}-${c}`, p.sitios[`${f}-${c}`]);
   return h + `</div>`;
 }
@@ -1330,7 +1454,7 @@ function hojaPlano(g, aula){
   for(let f=1; f<=P.filas; f++){
     filas += '<tr>';
     for(let c=1; c<=P.cols; c++){ const n = P.sitios[`${f}-${c}`];
-      filas += n ? `<td class="m"><b>${n}</b><span></span></td>` : '<td class="v"></td>'; }
+      filas += n ? `<td class="m"><b>${n}</b><span>${esc(nomDe(g,n))}</span></td>` : '<td class="v"></td>'; }
     filas += '</tr>';
   }
   const N = store.cfg.alumnos[g]||25, en = new Set(Object.values(P.sitios)), sin = []; for(let i=1;i<=N;i++) if(!en.has(i)) sin.push(i);
@@ -1340,14 +1464,14 @@ function hojaPlano(g, aula){
   .piz{text-align:center;font-size:9pt;letter-spacing:3px;text-transform:uppercase;border-bottom:3px solid #222;margin:0 30% 4mm;padding-bottom:1mm}
   table{width:100%;border-collapse:separate;border-spacing:3mm;table-layout:fixed}
   td{height:20mm;vertical-align:top;border-radius:2mm} td.m{border:1.2px solid #333;padding:1.5mm 2mm;position:relative}
-  td.m b{font-size:13pt} td.m span{position:absolute;left:2mm;right:2mm;bottom:3mm;border-bottom:1px solid #999}
+  td.m b{font-size:13pt} td.m span{position:absolute;left:2mm;right:2mm;bottom:3mm;border-bottom:1px solid #999;font-size:10pt;line-height:1.2;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
   td.v{border:1px dashed #ccc} .pie{font-size:8.5pt;color:#555;margin-top:2mm}
   </style></head><body>
   <h1>Plano del aula · ${esc(GRUPOS[g].nombre)}${aula?' · aula '+esc(aula):''}</h1>
   <p class="meta">${[store.cfg.docente, store.cfg.centro, store.cfg.curso].filter(Boolean).map(esc).join(' · ')} · ${larga(hoyK())}</p>
   <div class="piz">pizarra</div><table>${filas}</table>
   ${sin.length?`<p class="pie">Sin mesa: ${sin.join(', ')}.</p>`:''}
-  <p class="pie">Escribe el nombre a mano en cada mesa. Documento del profesor: no se entrega, no se publica y no se sube a Aules.</p>
+  <p class="pie">${NOMBRES&&NOMBRES[g]?'Nombres del listado cargado; corrige a mano lo que haya cambiado.':'Escribe el nombre a mano en cada mesa.'} Documento del profesor: no se entrega, no se publica y no se sube a Aules.</p>
   <script>window.onload=()=>setTimeout(()=>window.print(),300)<\/script></body></html>`;
 }
 function accionPlano(a, b){
@@ -1488,6 +1612,8 @@ function vAjustes(){
     ${store.programa?`<p class="nota" style="margin-top:12px"><button class="chip" data-a="cargar-prog">Poner las situaciones de la programación</button><br>
       Las sesiones ya registradas no se tocan.</p>`:''}
   </div>
+  <div class="panel"><p><b>Deberes «a medias»</b><br><span class="nota">El criterio que aplicas siempre. Sale debajo de la lista al revisar.</span></p>
+    <input type="text" id="aj-medias" value="${esc(c.criterioMedias || DEF_MEDIAS)}"></div>
   <div class="panel"><p><b>Días no lectivos</b><br><span class="nota">Festivos y días sin clase: no cuentan como sesiones sin registrar.</span></p>
     ${CAL.dias.some(k=>!c.nolectivos.includes(k)) ? `<button class="bloque-btn" data-a="cal" style="margin-top:0">Cargar los festivos del ${CAL.nombre}</button>` : `<p class="nota">Cargados los festivos del ${CAL.nombre}. Fin de las clases: ${larga(CAL.fin)}.</p>`}
     <div class="fila2"><input type="date" id="aj-nl"><button class="secundario" data-a="add-nl">Añadir</button></div>
@@ -1506,7 +1632,12 @@ function vAjustes(){
   <div class="panel"><p><b>Protección de datos</b></p>
     <p class="nota">Apunta al alumnado solo por número de lista, nunca por nombre. Las notas de sesión son para el
     seguimiento del grupo; los datos personales van en ITACA y Aules. Nada de este cuaderno sale del móvil
-    salvo las copias que tú mandes.</p></div>
+    salvo las copias que tú mandes.</p>
+    <p class="nota"><b>Ver nombres.</b> En «Deberes para revisar» puedes abrir tu listado desde el OneDrive de la GVA:
+    un CSV con tres columnas, <i>grupo; número; nombre</i> (por ejemplo <i>1B; 7; García López, Lucía</i>), todos los
+    grupos en el mismo archivo. La app lo lee y lo olvida al cerrarse o tras 20 minutos fuera: no lo guarda, no va
+    en las copias ni en los informes. ${NOMBRES?`Ahora: cargados de «${esc(NOMBRES_DE)}». <button class="chip" data-a="olvidar">Olvidar</button>`:'Ahora: ninguno cargado.'}</p>
+    ${NOMBRES?'':'<button class="bloque-btn" data-a="nombres">Cargar el listado de nombres (CSV)</button>'}</div>
   <button class="bloque-btn lleno" data-a="guardar-aj">Guardar ajustes</button>
   <p class="nota" style="text-align:center;margin-top:14px">Cuaderno de aula · versión ${VERSION_APP}</p>`;
   return h;
@@ -1625,16 +1756,39 @@ function pintarHoja(){
           if(r){
             const N = store.cfg.alumnos[b.grupo]||25, P = planoDe(b.grupo, b.aula), modo = P && (store.cfg.revModo||{})[b.grupo]!=='lista' ? 'plano' : 'lista';
             if(P) h += `<div class="seg dos" style="margin-top:10px"><button data-h="modo" data-v="plano" aria-pressed="${modo==='plano'}">Plano</button><button data-h="modo" data-v="lista" aria-pressed="${modo==='lista'}">Lista</button></div>`;
+            const C = cuentaRev(r, N), crit = store.cfg.criterioMedias || DEF_MEDIAS;
             if(modo==='plano'){
-              h += rejillaPlano(P, (k,n)=> n ? `<button class="mesa llena" data-h="no" data-id="${id}" data-i="${n}" aria-pressed="${r.no.includes(n)}" aria-label="Número ${n}">${n}</button>` : `<button class="mesa" disabled></button>`);
+              // en el plano, un toque aplica el «pincel» elegido; otro toque en la misma mesa la devuelve a «los trae»
+              const pin = revPincel[id] || 'no';
+              h += `<div class="seg pincel" role="group" aria-label="Qué marca un toque">${Object.entries(EST).map(([k,v])=>`<button data-h="pincel" data-id="${id}" data-v="${k}" aria-pressed="${pin===k}">${v}</button>`).join('')}</div>`;
+              const mesa = (n, cls) => { const e = estadoDe(r,n), nom = nomDe(b.grupo,n);
+                return `<button class="${cls} st-${e}" data-h="est" data-id="${id}" data-i="${n}" aria-pressed="${e!=='si'}" aria-label="Número ${n}: ${e==='si'?'los trae':EST[e]}" title="${esc(nom)}">${n}${cls.includes('mesa')&&nom?`<small>${esc(nomCorto(nom))}</small>`:''}</button>`; };
+              h += rejillaPlano(P, (k,n)=> n ? mesa(n,'mesa llena') : `<button class="mesa" disabled></button>`, NOMBRES && NOMBRES[b.grupo] ? 'connom' : '');
               const enMesa = new Set(Object.values(P.sitios)), sin = []; for(let i=1;i<=N;i++) if(!enMesa.has(i)) sin.push(i);
-              if(sin.length) h += `<div class="sin-mesa">Sin mesa: ${sin.map(i=>`<button data-h="no" data-id="${id}" data-i="${i}" aria-pressed="${r.no.includes(i)}">${i}</button>`).join('')}</div>`;
+              if(sin.length) h += `<div class="sin-mesa">Sin mesa: ${sin.map(i=>mesa(i,'')).join('')}</div>`;
             }else{
-              h += `<div class="lista" role="group" aria-label="Números de lista que no los traen">`;
-              for(let i=1;i<=N;i++) h += `<button data-h="no" data-id="${id}" data-i="${i}" aria-pressed="${r.no.includes(i)}">${i}</button>`;
-              h += `</div>`;
+              // Lista desplegable: una fila por alumno; todos empiezan en «los trae» y se toca solo la excepción.
+              const fil = revFiltro[id] || 'todos';
+              h += `<details class="revl" data-revl="${id}" ${revPlegadas.has(id)?'':'open'}>
+                <summary><span class="cuenta"><b>${C.si}</b> ✓ · <b style="color:#b7791f">${C.medias}</b> ½ · <b style="color:var(--rojo)">${C.no}</b> ✗ · <b>${C.falta}</b> faltan · de ${N}</span></summary>
+                <div class="filtro seg">${[['todos','Todos'],['si','Los traen'],['exc','Excepciones']].map(([k,v])=>`<button data-h="rfil" data-id="${id}" data-v="${k}" aria-pressed="${fil===k}">${v}</button>`).join('')}</div>
+                <div class="filas" role="group" aria-label="Entrega de deberes por número de lista">`;
+              for(let i=1;i<=N;i++){
+                const e = estadoDe(r,i); if((fil==='si' && e!=='si') || (fil==='exc' && e==='si')) continue;
+                const nom = nomDe(b.grupo,i);
+                h += `<div class="fila st-${e}" title="${esc(nom)}"><span class="n">${i}</span><span class="nom">${nom?esc(nomCorto(nom)):''}</span>
+                  ${e==='si'?'<span class="ok">✓</span>':''}<span class="bt">
+                  <button data-h="est" data-id="${id}" data-i="${i}" data-v="no" aria-pressed="${e==='no'}" aria-label="${i}: no los trae">✗</button>
+                  <button data-h="est" data-id="${id}" data-i="${i}" data-v="medias" aria-pressed="${e==='medias'}" aria-label="${i}: a medias">½</button>
+                  <button data-h="est" data-id="${id}" data-i="${i}" data-v="falta" aria-pressed="${e==='falta'}" aria-label="${i}: falta">Falta</button></span></div>`;
+              }
+              h += `</div></details>`;
             }
-            h += `<div class="lista-nota">Toca ${modo==='plano'?'la mesa':'el número'} de quien <b>no</b> los trae. ${r.no.length? 'No los traen: '+r.no.join(', ') : 'Ahora mismo: los traen todos.'}</div>`;
+            h += `<div class="lista-nota">Todos empiezan en <b>los trae</b>: marca solo ${modo==='plano'?'las mesas':'las filas'} que no; otro toque lo deshace.
+              <b>½</b> = ${esc(crit)} Los que faltan no cuentan en el porcentaje.<br>${revTxt(r, b.grupo)}.</div>`;
+            h += NOMBRES
+              ? `<div class="nombres">Nombres de «${esc(NOMBRES_DE)}», solo mientras la app está abierta.${NOMBRES[b.grupo]?'':' No hay ninguno de este grupo.'} <button class="chip" data-h="olvidar">Olvidar nombres</button></div>`
+              : `<div class="nombres"><button class="chip" data-h="nombres">Ver nombres</button> abre tu listado (CSV) del OneDrive de la GVA. No se guarda.</div>`;
           }
           h += `</div>`;
         }
@@ -1710,7 +1864,7 @@ function filasExport(){
 const perdTxt = s => { const a = s.perdIni!==undefined && s.perdIni!=='', b = s.perdFin!==undefined && s.perdFin!=='';
   return a||b ? `perdidos ${a?s.perdIni:'?'} + ${b?s.perdFin:'?'} min` : ''; };
 const textoRev = s => (s.revisiones||[]).map(r=>{
-  const o = store.ses[r.de]; return `Deberes del ${o?corta(o.fecha):corta(r.de.split('_')[0])}: ${r.no&&r.no.length?'no los traen nº '+r.no.join(', '):'los traen todos'}`;
+  const o = store.ses[r.de]; return `Deberes del ${o?corta(o.fecha):corta(r.de.split('_')[0])} (nº de lista): ${revTxt(r)}`;
 }).join('; ');
 function csv(){
   const f = filasExport();
@@ -1742,14 +1896,14 @@ function informe(){
   for(const g of gs){
     const I = indicadores(g, desde, hasta);
     resumen += `<tr><td>${GRUPOS[g].nombre}</td><td>${I.previstas}</td><td>${I.dadas}</td><td>${I.noDadas}</td><td>${I.sinRegistrar}</td>
-      <td>${I.entrega===null?'—':I.entrega+' % ('+I.revisadas+' revisiones)'}</td>
+      <td>${I.entrega===null?'—':I.entrega+' % completos'+(I.entregaMedias?' + '+I.entregaMedias+' % a medias':'')+' ('+I.revisadas+' revisiones)'}</td>
       <td>${I.climaN?`${pct(I.clima.bien,I.climaN)} / ${pct(I.clima.regular,I.climaN)} / ${pct(I.clima.mal,I.climaN)} %`:'—'}</td>
       <td>${I.perd.n?`${I.perd.mIni} + ${I.perd.mFin} (${I.perd.n} ses.; total ${minTxt(I.perd.total)})`:'—'}</td>
       <td>${I.pt?`${I.ptSi} de ${I.pt}`:'—'}</td></tr>`;
   }
   const nRec = f.filter(s=>s.reconstruido).length;
   resumen += `</tbody></table>${nRec?`<p class="meta">${nRec} ${nRec===1?'sesión se registró después, reconstruida':'sesiones se registraron después, reconstruidas'} a partir de lo indicado en cada una.</p>`:''}<p class="meta">«Previstas»: sesiones del horario en días lectivos del periodo que ya han pasado.
-    «Entrega de deberes»: porcentaje de alumnado que los trae, sobre las revisiones registradas.</p>`;
+    «Entrega de deberes»: porcentaje del alumnado presente que los trae completos (y a medias), sobre las revisiones registradas; los ausentes no cuentan.</p>`;
   // 2. clima por franja horaria
   const cf = climaPorFranja(desde, hasta);
   const hayClima = Object.values(cf).some(x=>x.bien+x.regular+x.mal);
@@ -1871,6 +2025,15 @@ document.getElementById('app').addEventListener('click', async e=>{
     abrirFecha(null, {tipo:'examen', titulo:'Prueba: '+(sa?sa.n:''), notas:'', sa:b.dataset.sa, fechas:{[g]:b.dataset.k}});
   }
   else if(a==='cargar-prog'){ leerUnidades(); ponerUnidadesProg(true); guardarCfg(); toast('Unidades de la programación puestas'); pintar(); }
+  else if(a==='nombres'){ const i = $('#archivo-nombres'); i.value=''; i.click(); }
+  else if(a==='csv-deberes'){
+    const g = b.dataset.g, d = paDesde || store.cfg.inicio, hs = paHasta || hoyK(), D = deberesPorAlumno(g, d, hs);
+    let s = 'grupo;número;revisiones presente;completos;a medias;no;faltas;% completos\r\n';
+    for(let i=1;i<=D.N;i++){ const x = D.A[i], pres = x.si + x.medias + x.no;
+      s += [g, i, pres, x.si, x.medias, x.no, x.falta, pres?Math.round(100*x.si/pres):''].join(';') + '\r\n'; }
+    await descargar(`deberes-${g}_${d}_${hs}.csv`, '\uFEFF'+s, 'text/csv');
+  }
+  else if(a==='olvidar'){ olvidarNombres('Nombres olvidados'); pintar(); }
   else if(a==='archivo-prog'){ const i = $('#archivo-prog'); i.value=''; i.click(); }
   else if(a==='quitar-prog'){ if(confirm('¿Quitar la programación de este móvil? Lo marcado como hecho se conserva por si la vuelves a cargar.')){ store.programa = null; cachePlan = {}; guardarLocal(); pintar(); } }
   else if(a==='restaurar'){ const i = $('#archivo-copia'); i.value=''; i.click(); }
@@ -1902,6 +2065,7 @@ document.getElementById('app').addEventListener('click', async e=>{
     c.copia = {dia: Number($('#aj-cdia').value), hora: $('#aj-chora').value || '14:10'};
     c.docente = $('#aj-doc').value.trim(); c.centro = $('#aj-centro').value.trim(); c.curso = $('#aj-curso').value.trim();
     if($('#aj-inicio').value) c.inicio = $('#aj-inicio').value;
+    { const v = $('#aj-medias').value.trim(); if(v && v!==DEF_MEDIAS) c.criterioMedias = v; else delete c.criterioMedias; }
     document.querySelectorAll('.aj-n').forEach(i=>{ const n = Math.max(1, Math.min(40, parseInt(i.value)||25)); c.alumnos[i.dataset.g] = n; });
     guardarCfg(); toast('Ajustes guardados'); pintar();
   }
@@ -1910,6 +2074,32 @@ document.getElementById('archivo-prog').addEventListener('change', e=>{
   const f = e.target.files && e.target.files[0]; if(!f) return;
   const r = new FileReader(); r.onerror = ()=> toast('No se ha podido leer el archivo');
   r.onload = ()=>{ e.target.value = ''; cargarProgramacion(r.result); }; r.readAsText(f);
+});
+document.getElementById('hoja').addEventListener('toggle', e=>{
+  const d = e.target; if(!d.matches || !d.matches('details[data-revl]')) return;
+  if(d.open) revPlegadas.delete(d.dataset.revl); else revPlegadas.add(d.dataset.revl);
+}, true);
+document.getElementById('app').addEventListener('change', e=>{
+  if(e.target.id==='pa-desde'){ paDesde = e.target.value; pintar(); }
+  else if(e.target.id==='pa-hasta'){ paHasta = e.target.value; pintar(); }
+});
+// ── NOMBRES: se leen y se quedan en memoria (ver NOMBRES arriba) ──
+// Excel en español guarda el CSV en Windows-1252 salvo que se elija «CSV UTF-8»: se prueban los dos.
+document.getElementById('archivo-nombres').addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0]; if(!f) return;
+  const r = new FileReader(); r.onerror = ()=> toast('No se ha podido leer el archivo');
+  r.onload = ()=>{
+    e.target.value = '';
+    let txt; try{ txt = new TextDecoder('utf-8',{fatal:true}).decode(r.result); }
+    catch(err){ txt = new TextDecoder('windows-1252').decode(r.result); }
+    const L = leerNombres(txt);
+    if(!L){ toast('No he encontrado filas «grupo; número; nombre»'); return; }
+    NOMBRES = L.out; NOMBRES_DE = f.name;
+    const gs = Object.keys(L.out).map(g=>GRUPOS[g].nombre).join(', ');
+    toast(`${L.n} nombres (${gs})${L.malas>1?` · ${L.malas} filas sin leer`:''}`);
+    if($('#hoja').classList.contains('abierta')) pintarHoja(); else pintar();
+  };
+  r.readAsArrayBuffer(f);
 });
 // ── RESTAURAR UNA COPIA ──
 // Se lee el archivo, se enseña qué trae y se pide confirmación dentro de la app
@@ -1980,6 +2170,8 @@ document.getElementById('hoja').addEventListener('click', e=>{
     const v = b.dataset.v; const cur = (borrador.material||'').trim();
     borrador.material = cur ? (cur.split(/,\s*/).includes(v) ? cur : cur+', '+v) : v;
   }
+  else if(h==='nombres'){ const i = $('#archivo-nombres'); i.value=''; i.click(); return; }
+  else if(h==='olvidar'){ olvidarNombres('Nombres olvidados'); }
   else if(h==='igual'){
     const o = store.ses[b.dataset.id];
     if(o){ borrador.contenido = o.contenido||''; borrador.material = o.material||''; borrador.deberes = o.deberes||'';
@@ -1989,13 +2181,17 @@ document.getElementById('hoja').addEventListener('click', e=>{
   else if(h==='rev'){
     const id = b.dataset.id; borrador.revisiones = borrador.revisiones||[];
     const i = borrador.revisiones.findIndex(r=>r.de===id);
-    if(i>=0) borrador.revisiones.splice(i,1); else borrador.revisiones.push({de:id, no:[]});
+    if(i>=0){ const r = borrador.revisiones.splice(i,1)[0], m = (r.no||[]).length + (r.medias||[]).length + (r.falta||[]).length;
+      if(m){ revQuitadas[id] = r; toast(`Revisión quitada. Si ha sido sin querer, toca «Revisar hoy» y vuelven las ${m} marcas`); } }
+    else{ borrador.revisiones.push(revQuitadas[id] || {de:id, no:[]}); delete revQuitadas[id]; }
   }
+  else if(h==='rfil'){ revFiltro[b.dataset.id] = b.dataset.v; }
   else if(h==='modo'){ store.cfg.revModo = store.cfg.revModo || {}; store.cfg.revModo[borrador.grupo] = b.dataset.v; guardarCfg(); }
-  else if(h==='no'){
+  else if(h==='est'){
     const r = borrador.revisiones.find(x=>x.de===b.dataset.id); const n = Number(b.dataset.i);
-    if(r){ r.no = r.no.includes(n) ? r.no.filter(x=>x!==n) : [...r.no, n].sort((x,y)=>x-y); }
+    if(r){ ponEstado(r, n, b.dataset.v || revPincel[b.dataset.id] || 'no'); if(!(r.medias||[]).length) delete r.medias; if(!(r.falta||[]).length) delete r.falta; }
   }
+  else if(h==='pincel'){ revPincel[b.dataset.id] = b.dataset.v; }
   else if(h==='guardar'){
     const b2 = borrador;
     if(b2.grupo && b2.estado==='no' && !b2.motivo){ toast('Elige el motivo'); return; }
@@ -2062,7 +2258,11 @@ document.getElementById('hoja').addEventListener('click', ev=>{
 document.addEventListener('keydown', e=>{ if(e.key==='Escape' && $('#hoja').classList.contains('abierta')) cerrar(); });
 // al volver a la app (cambio de pestaña o de hora) se repinta: la franja «ahora» se mueve sola
 document.addEventListener('visibilitychange', ()=>{
-  if(document.hidden){ clearTimeout(tBorr); guardarBorrador(); return; }
+  if(document.hidden){ clearTimeout(tBorr); guardarBorrador(); tOculto = Date.now(); return; }
+  if(NOMBRES && tOculto && Date.now() - tOculto > 20*60000){
+    olvidarNombres('Nombres olvidados tras 20 minutos fuera de la app');
+    if($('#hoja').classList.contains('abierta')) pintarHoja();
+  }
   if(!borrador && !copiaPendiente) pintar();
 });
 window.addEventListener('pagehide', ()=>{ clearTimeout(tBorr); guardarBorrador(); });

@@ -35,6 +35,20 @@ LOS DATOS
   copia» lo recupera todo.
 - Alumnado solo por número de lista, nunca por nombre.
 
+DEBERES (versión 1.3)
+- Al revisar, todos empiezan en ✓ (los trae). Se marca solo la excepción:
+  ✗ no los trae, ½ a medias, Falta (no ha venido). Otro toque lo deshace.
+  Los que faltan no cuentan en el porcentaje. El criterio de «a medias» se
+  cambia en Ajustes.
+- Hay lista desplegable (una fila por alumno) y, si el grupo tiene plano,
+  el plano con un selector de qué marca cada toque.
+- En Grupos → «Deberes por alumno»: tabla por número entre dos fechas y un
+  CSV solo con números para pegar junto al listado de notas.
+- Ver nombres: un CSV con «grupo; número; nombre» guardado en el OneDrive
+  de la GVA (plantilla: listado-plantilla.csv). Se abre desde Ajustes o
+  desde la revisión; la app lo tiene en memoria y lo olvida al cerrarse o
+  tras 20 minutos fuera. No va a las copias ni a los informes.
+
 ACTUALIZARLA
 Sube el index.html nuevo (y sw.js con VERSION nueva: bosque-v2, v3…). Al
 abrir la app con conexión carga la versión nueva; los datos no se tocan.
